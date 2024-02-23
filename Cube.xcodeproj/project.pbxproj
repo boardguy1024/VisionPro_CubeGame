@@ -11,6 +11,8 @@
 		2D754E482B84EDD1001B43B0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D754E472B84EDD1001B43B0 /* ContentView.swift */; };
 		2D754E4A2B84EDD4001B43B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D754E492B84EDD4001B43B0 /* Assets.xcassets */; };
 		2D754E4D2B84EDD4001B43B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D754E4C2B84EDD4001B43B0 /* Preview Assets.xcassets */; };
+		2D754E542B84EEEA001B43B0 /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D754E532B84EEEA001B43B0 /* Cube.swift */; };
+		2DC7BBD72B876B1C00646249 /* Cube2DView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC7BBD62B876B1C00646249 /* Cube2DView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		2D754E472B84EDD1001B43B0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2D754E492B84EDD4001B43B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2D754E4C2B84EDD4001B43B0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2D754E532B84EEEA001B43B0 /* Cube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
+		2DC7BBD62B876B1C00646249 /* Cube2DView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cube2DView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +57,8 @@
 			children = (
 				2D754E452B84EDD1001B43B0 /* CubeApp.swift */,
 				2D754E472B84EDD1001B43B0 /* ContentView.swift */,
+				2DC7BBD62B876B1C00646249 /* Cube2DView.swift */,
+				2D754E532B84EEEA001B43B0 /* Cube.swift */,
 				2D754E492B84EDD4001B43B0 /* Assets.xcassets */,
 				2D754E4B2B84EDD4001B43B0 /* Preview Content */,
 			);
@@ -139,6 +145,8 @@
 			files = (
 				2D754E482B84EDD1001B43B0 /* ContentView.swift in Sources */,
 				2D754E462B84EDD1001B43B0 /* CubeApp.swift in Sources */,
+				2D754E542B84EEEA001B43B0 /* Cube.swift in Sources */,
+				2DC7BBD72B876B1C00646249 /* Cube2DView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
