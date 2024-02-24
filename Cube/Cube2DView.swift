@@ -11,8 +11,8 @@ struct Cube2DView: View {
     
     var cube2D = Cube2D()
 
-    init(cube: Cube) {
-        cube2D = cube.as2D()
+    init(cube: Cube2D) {
+        cube2D = cube
     }
     
     var body: some View {
@@ -87,7 +87,7 @@ struct Cell: View {
 
 
 #Preview {
-    Cube2DView(cube: Cube())
+    Cube2DView(cube: Cube().apply(move: .U).as2D())
 }
 
 struct Cube2D {

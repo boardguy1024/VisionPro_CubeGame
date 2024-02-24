@@ -39,7 +39,7 @@ enum Face: Int, CaseIterable {
     case right = 5
 }
 
-struct Vector {
+struct Vector: Equatable {
     let x: Float
     let y: Float
     let z: Float
@@ -49,9 +49,71 @@ struct Vector {
     }
 }
 
+extension Vector {
+    func rotate(on axis: Vector, angle: Rotation) -> Vector {
+        
+        var (x, y, z) = values
+        
+        // x軸をベースに縦回しの場合、yとzが変わる
+        if axis == Axis.X {
+            (y, z) = rotate2D(y, z, angle)
+        } else if axis == Axis.Y {
+            // YAW rotationなので x, z
+            (z, x) = rotate2D(z, x, angle)
+        } else if axis == Axis.Z {
+            // z軸をベースに 正面の面全体を左or右に回すイメージ
+            (x, y) = rotate2D(x, y, angle)
+        }
+        
+        return Vector(x: x, y: y, z: z)
+        
+        /*
+         vector ( x, y ) 回転配列の計算
+         x' = x * cosθ - y * sinθ
+         y' = x * sinθ + y * cosθ
+         
+         */
+        func rotate2D(_ x: Float, _ y: Float, _ angle: Rotation) -> (Float, Float) {
+            let sin_t: Float = sin(angle.angle)
+            let cos_t: Float = cos(angle.angle)
+            
+            let resultX = x * cos_t - y * sin_t
+            let resultY = x * sin_t + y * cos_t
+            return (cleanup(resultX), cleanup(resultY))
+        }
+        
+        // 小数点 1桁を四捨五入
+        func cleanup(_ value: Float) -> Float  {
+            // 2倍にすると必ず整数なので、こう計算して、割り切れない小数点によるズレを防ぐため
+            return roundf(value * 2) / 2
+        }
+    }
+}
+
+enum Rotation {
+    case clockwise
+    case counterClockwire
+    case filp
+    
+    var angle: Float {
+        switch self {
+        // 数学の回転ではデフォルトが反時計回りなので -にする
+        case .clockwise: -.pi / 2
+        case .counterClockwire: .pi / 2
+        case .filp: .pi
+        }
+    }
+}
+
+struct Axis {
+    static let X = Vector(x: 1, y: 0, z: 0)
+    static let Y = Vector(x: 0, y: 1, z: 0)
+    static let Z = Vector(x: 0, y: 0, z: 1)
+}
+
 struct Sticker {
     let color: ColorType
-    let position: Vector
+    var position: Vector
     
     var face: Face {
         if position.y == onFace {
@@ -113,6 +175,12 @@ struct Sticker {
                                    red red red
          
          */
+    }
+    
+    func rotate(on axis: Vector, by angle: Rotation) -> Sticker {
+        var rotated = self
+        rotated.position = position.rotate(on: axis, angle: angle)
+        return rotated
     }
 }
 
