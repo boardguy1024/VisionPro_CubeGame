@@ -9,11 +9,21 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @State private var cube = Cube()
+    
     var body: some View {
-        Cube2DView(cube: Cube().apply(movesStr: "").as2D())
+        ZStack {
+            Color.gray.opacity(0.3).ignoresSafeArea()
+            VStack {
+                Cube2DView(cube: cube.as2D())
+                MoveControllerView { move in
+                    cube = cube.apply(move: move)
+                }
+                .padding()
+            }
+        }
     }
 }
-
 
 #Preview {
     ContentView()

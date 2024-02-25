@@ -17,7 +17,6 @@ struct Cube2DView: View {
     
     var body: some View {
         ZStack {
-            Color.gray.opacity(0.3).ignoresSafeArea()
             VStack {
                 Grid {
                     GridRow {
