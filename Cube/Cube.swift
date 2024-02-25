@@ -47,24 +47,33 @@ struct Vector: Equatable {
     var values: (Float, Float, Float) {
         (x, y, z)
     }
+    
+    var negative: Vector {
+        Self(x: -x, y: -y, z: -z)
+    }
 }
 
 extension Vector {
     func rotate(on axis: Vector, angle: Rotation) -> Vector {
-        
+                
         var (x, y, z) = values
         
-        // x軸をベースに縦回しの場合、yとzが変わる
-        if axis == Axis.X {
+        switch axis {
+        case Axis.X, Axis.X.negative:
+            // x軸をベースに縦回しの場合、yとzが変わる
             (y, z) = rotate2D(y, z, angle)
-        } else if axis == Axis.Y {
+            
+        case Axis.Y, Axis.Y.negative:
             // YAW rotationなので x, z
             (z, x) = rotate2D(z, x, angle)
-        } else if axis == Axis.Z {
+            
+        case Axis.Z, Axis.Z.negative:
             // z軸をベースに 正面の面全体を左or右に回すイメージ
             (x, y) = rotate2D(x, y, angle)
+        default:
+            assert(false, "Invalid axis")
         }
-        
+      
         return Vector(x: x, y: y, z: z)
         
         /*
@@ -77,7 +86,7 @@ extension Vector {
             let sin_t: Float = sin(angle.angle)
             let cos_t: Float = cos(angle.angle)
             
-            let resultX = x * cos_t - y * sin_t
+            let resultX =  x * cos_t - y * sin_t
             let resultY = x * sin_t + y * cos_t
             return (cleanup(resultX), cleanup(resultY))
         }
@@ -149,8 +158,8 @@ struct Sticker {
         case .down: return indexOnFace(x, -z) // red
         case .front: return indexOnFace(x, -y) // green
         case .back: return indexOnFace(-x, -y) // yellow
-        case .left: return indexOnFace(-z, -y) // orange
-        case .right: return indexOnFace(z, -y) // blue
+        case .left: return indexOnFace(z, -y) // orange
+        case .right: return indexOnFace(-z, -y) // blue
         }
         
         func indexOnFace(_ x: Float, _ y: Float) -> Int {
@@ -179,7 +188,9 @@ struct Sticker {
     
     func rotate(on axis: Vector, by angle: Rotation) -> Sticker {
         var rotated = self
+        
         rotated.position = position.rotate(on: axis, angle: angle)
+        
         return rotated
     }
 }
@@ -223,7 +234,7 @@ struct Cube {
         case .down: Vector(x: x, y: -onFace, z: -y)
         case .left: Vector(x: -onFace, y: y, z: x)
         case .front: Vector(x: x, y: -y, z: onFace)
-        case .right: Vector(x: onFace, y: y, z: x)
+        case .right: Vector(x: onFace, y: -y, z: -x)
         case .back: Vector(x: x, y: y, z: -onFace)
         }
     }
@@ -235,15 +246,11 @@ struct Cube {
             cube2D.setColorType(of: sticker.face, index: sticker.index, color: sticker.color)
         }
         
-        stickers.forEach { sticker in
-            print("face: \(sticker.face)")
-            print("position: \(sticker.position)")
-        }
-        
-        //指定したポイントにColorTypeを設定
-        
-
-        
+//        stickers.forEach { sticker in
+//            print("face: \(sticker.face)")
+//            print("position: \(sticker.position)")
+//        }
+            
         return cube2D
     }
 }

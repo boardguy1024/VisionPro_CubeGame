@@ -23,7 +23,6 @@ struct Cube2DView: View {
                     GridRow {
                         Text("")
                         FaceCell(cube: cube2D, face: .up)
-
                     }
                     
                     GridRow {
@@ -51,27 +50,31 @@ struct FaceCell: View {
     var body: some View {
         Grid(horizontalSpacing: 1, verticalSpacing: 1) {
             GridRow {
-                Cell(type: color(0))
-                Cell(type: color(1))
-                Cell(type: color(2))
+                Cell(type: color(indexOfFace: 0))
+                Cell(type: color(indexOfFace: 1))
+                Cell(type: color(indexOfFace: 2))
             }
             
             GridRow {
-                Cell(type: color(3))
-                Cell(type: color(4))
-                Cell(type: color(5))
+                Cell(type: color(indexOfFace: 3))
+                Cell(type: color(indexOfFace: 4))
+                Cell(type: color(indexOfFace: 5))
             }
             
             GridRow {
-                Cell(type: color(6))
-                Cell(type: color(7))
-                Cell(type: color(8))
+                Cell(type: color(indexOfFace: 6))
+                Cell(type: color(indexOfFace: 7))
+                Cell(type: color(indexOfFace: 8))
             }
         }
     }
     
-    func color(_ index: Int) -> ColorType {
-        cube.color(of: face, index: index)
+    func color(indexOfFace: Int) -> ColorType {
+        // Cube2D init時に 0..<54のdefault色が収納されている
+        // face: up, down, front, back, left, right順番
+        // [w,w,w,w,w,w,w,w,w, r,r,r,r,r,r,r,r,r, g,g,g,g,g,g,g,g,g ...]
+        cube.colors[face.rawValue * 9 + indexOfFace]
+        
     }
 }
 
@@ -87,7 +90,7 @@ struct Cell: View {
 
 
 #Preview {
-    Cube2DView(cube: Cube().apply(move: .U).as2D())
+    Cube2DView(cube: Cube().apply(move: .D).as2D())
 }
 
 struct Cube2D {
@@ -103,31 +106,8 @@ struct Cube2D {
             }
         }
     }
-    
-    private func index(of face: Face, index: Int) -> Int {
-        /*
-         case up = 0
-         case down = 1
-         case front = 2
-         case back = 3
-         case left = 4
-         case right = 5
-         */
-    
-        face.rawValue * 9 + index
-    }
-    
-    func color(of face: Face, index: Int) -> ColorType {
-    // index0 = white
-    // index1 red
-    // index2 green
-    // index3 yellow
-    // index4 orange
-    // index5 blue
-        return colors[self.index(of: face, index: index)]
-    }
-    
+
     mutating func setColorType(of face: Face, index: Int, color: ColorType) {
-        colors[self.index(of: face, index: index)] = color
+        colors[face.rawValue * 9 + index] = color
     }
 }
