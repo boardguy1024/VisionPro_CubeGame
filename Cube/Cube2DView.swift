@@ -90,7 +90,7 @@ struct Cell: View {
 
 
 #Preview {
-    Cube2DView(cube: Cube().apply(move: .D).as2D())
+    Cube2DView(cube: Cube().apply(moveType: .D).as2D())
 }
 
 struct Cube2D {

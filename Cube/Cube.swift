@@ -88,6 +88,7 @@ extension Vector {
             
             let resultX =  x * cos_t - y * sin_t
             let resultY = x * sin_t + y * cos_t
+
             return (cleanup(resultX), cleanup(resultY))
         }
         
