@@ -12,6 +12,7 @@ struct Cube3D {
     let scene = SCNScene()
     let cubeNode = SCNNode()
     var pieceNodes = [SCNNode]()
+    let cameraNode = SCNNode()
     
     init(with cube: Cube) {
         
@@ -21,7 +22,7 @@ struct Cube3D {
             // 1. pieceのBoxを生成
             let base = SCNBox(width: 1, height: 1, length: 1, chamferRadius: 0.1)
             // 2. 色を設定
-            base.firstMaterial?.diffuse.contents = UIColor(white: 0.1, alpha: 0.5)
+            base.firstMaterial?.diffuse.contents = UIColor(white: 0.1, alpha: 1)
             // 3. nodeを作成
             let piece = SCNNode(geometry: base)
             
@@ -90,10 +91,19 @@ struct Cube3D {
             }
         }
         pieceNodes = nodes
+        
+        addCameraNode()
     }
     
-    
-    
+    private func addCameraNode() {
+        let camera = SCNCamera()
+        camera.projectionDirection = .horizontal
+        
+        cameraNode.camera = camera
+        cameraNode.position =  SCNVector3(7, 7, 10)
+        cameraNode.constraints = [SCNLookAtConstraint(target: cubeNode)]
+        scene.rootNode.addChildNode(cameraNode)
+    }
 }
 
 extension Vector {
