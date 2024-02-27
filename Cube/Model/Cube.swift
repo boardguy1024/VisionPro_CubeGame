@@ -10,7 +10,7 @@ import SwiftUI
 
 let onFace: Float = 1.5
 
-enum ColorType: String, CaseIterable {
+enum ColorType: String, CaseIterable, Codable {
     case white = "W"
     case red = "R"
     case green = "G"
@@ -19,6 +19,17 @@ enum ColorType: String, CaseIterable {
     case blue = "B"
     
     var color: Color {
+        switch self {
+        case .white: .white
+        case .red: .red
+        case .green: .green
+        case .yellow: .yellow
+        case .orange: .orange
+        case .blue: .blue
+        }
+    }
+    
+    var uiColor: UIColor {
         switch self {
         case .white: .white
         case .red: .red
@@ -39,7 +50,7 @@ enum Face: Int, CaseIterable {
     case right = 5
 }
 
-struct Vector: Equatable {
+struct Vector: Equatable, Codable {
     let x: Float
     let y: Float
     let z: Float
@@ -121,7 +132,7 @@ struct Axis {
     static let Z = Vector(x: 0, y: 0, z: 1)
 }
 
-struct Sticker {
+struct Sticker: Codable {
     let color: ColorType
     var position: Vector
     
@@ -196,7 +207,7 @@ struct Sticker {
     }
 }
 
-struct Cube {
+struct Cube: Codable {
     // 全てのコマにはる1個1個のステッカー count = 54
     var stickers: [Sticker] = []
     

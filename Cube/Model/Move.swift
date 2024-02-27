@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum MoveType: Character, CaseIterable {
+enum MoveType: Character, CaseIterable, Codable {
     case U = "U"
     case D = "D"
     case F = "F"
@@ -68,7 +68,7 @@ enum MoveType: Character, CaseIterable {
     }
 }
 
-struct Move {
+struct Move: Codable {
     let moveType: MoveType
     let prime: Bool
     let twice: Bool
@@ -77,6 +77,10 @@ struct Move {
         self.moveType = moveType
         self.prime = prime
         self.twice = twice
+    }
+    
+    var reversed: Move {
+        return Self(moveType, prime: !prime, twice: twice)
     }
     
     // 方向の文字列 Keyで それに値する Value(Move?)が返される
