@@ -10,23 +10,20 @@ import SceneKit
 
 struct ContentView: View {
     
-    @Binding var cube: Cube
-    @Binding var moves: [Move]
- 
-    var cube3D: Cube3D = Cube3D(with: Cube())
-    
+    @ObservedObject var play: Play
+
     var body: some View {
         ZStack {
             Color.gray.opacity(0.3).ignoresSafeArea()
             VStack {
                 HStack {
-                    SceneView(scene: cube3D.scene)
+                    SceneView(scene: play.scene)
                         .frame(height: 200)
                 }
                 .padding(.bottom )
-                Cube2DView(cube: cube.as2D())
-                MoveControllerView(moves: $moves) { move in
-                    cube = cube.apply(move: move)
+                Cube2DView(cube: play.cube.as2D())
+                MoveControllerView(moves: $play.moves) { move in
+                    play.apply(move: move)
                 }
                 .padding()
             }
@@ -34,6 +31,6 @@ struct ContentView: View {
     }
 }
 
-#Preview {
-    ContentView(cube: .constant(Cube()), moves: .constant([]))
-}
+//#Preview {
+//    ContentView(cube: .constant(Cube()), moves: .constant([]))
+//}

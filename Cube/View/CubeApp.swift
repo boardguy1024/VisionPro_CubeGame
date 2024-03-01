@@ -10,15 +10,14 @@ import SwiftUI
 @main
 struct CubeApp: App {
     @Environment(\.scenePhase) private var scenePhase
-    @StateObject var dataStore = DataStore()
-
+    @StateObject var play = Play()
     var body: some Scene {
         WindowGroup {
-            ContentView(cube: $dataStore.cube, moves: $dataStore.moves)
+            ContentView(play: play)
                 .onChange(of: scenePhase) { _, newValue in
                     if newValue == .inactive {
                         do {
-                            try dataStore.save()
+                            try play.save()
                         } catch {
                             fatalError(error.localizedDescription)
                         }
@@ -26,7 +25,7 @@ struct CubeApp: App {
                 }
                 .task {
                     do {
-                        try dataStore.load()
+                        try play.load()
                     } catch {
                         fatalError(error.localizedDescription)
                     }

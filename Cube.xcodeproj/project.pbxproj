@@ -12,8 +12,8 @@
 		2D754E4A2B84EDD4001B43B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D754E492B84EDD4001B43B0 /* Assets.xcassets */; };
 		2D754E4D2B84EDD4001B43B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D754E4C2B84EDD4001B43B0 /* Preview Assets.xcassets */; };
 		2D754E542B84EEEA001B43B0 /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D754E532B84EEEA001B43B0 /* Cube.swift */; };
-		2D8C4C352B8CB89300422AA2 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8C4C342B8CB89300422AA2 /* DataStore.swift */; };
-		2D8C4C392B8DDB8400422AA2 /* Cube3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8C4C382B8DDB8400422AA2 /* Cube3D.swift */; };
+		2D8C4C352B8CB89300422AA2 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8C4C342B8CB89300422AA2 /* Persistence.swift */; };
+		2D8C4C392B8DDB8400422AA2 /* Play.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8C4C382B8DDB8400422AA2 /* Play.swift */; };
 		2D96EB9E2B8B5F3300A7BC26 /* MoveControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D96EB9D2B8B5F3300A7BC26 /* MoveControllerView.swift */; };
 		2DC7BBD72B876B1C00646249 /* Cube2DView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC7BBD62B876B1C00646249 /* Cube2DView.swift */; };
 		2DC7BBD92B88BB7100646249 /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC7BBD82B88BB7100646249 /* Move.swift */; };
@@ -26,8 +26,8 @@
 		2D754E492B84EDD4001B43B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2D754E4C2B84EDD4001B43B0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2D754E532B84EEEA001B43B0 /* Cube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
-		2D8C4C342B8CB89300422AA2 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
-		2D8C4C382B8DDB8400422AA2 /* Cube3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cube3D.swift; sourceTree = "<group>"; };
+		2D8C4C342B8CB89300422AA2 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		2D8C4C382B8DDB8400422AA2 /* Play.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Play.swift; sourceTree = "<group>"; };
 		2D96EB9D2B8B5F3300A7BC26 /* MoveControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveControllerView.swift; sourceTree = "<group>"; };
 		2DC7BBD62B876B1C00646249 /* Cube2DView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cube2DView.swift; sourceTree = "<group>"; };
 		2DC7BBD82B88BB7100646249 /* Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
@@ -94,9 +94,9 @@
 			isa = PBXGroup;
 			children = (
 				2DC7BBD82B88BB7100646249 /* Move.swift */,
-				2D8C4C342B8CB89300422AA2 /* DataStore.swift */,
+				2D8C4C342B8CB89300422AA2 /* Persistence.swift */,
 				2D754E532B84EEEA001B43B0 /* Cube.swift */,
-				2D8C4C382B8DDB8400422AA2 /* Cube3D.swift */,
+				2D8C4C382B8DDB8400422AA2 /* Play.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -171,12 +171,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D8C4C352B8CB89300422AA2 /* DataStore.swift in Sources */,
+				2D8C4C352B8CB89300422AA2 /* Persistence.swift in Sources */,
 				2DC7BBD92B88BB7100646249 /* Move.swift in Sources */,
 				2D754E482B84EDD1001B43B0 /* ContentView.swift in Sources */,
 				2D754E462B84EDD1001B43B0 /* CubeApp.swift in Sources */,
 				2D754E542B84EEEA001B43B0 /* Cube.swift in Sources */,
-				2D8C4C392B8DDB8400422AA2 /* Cube3D.swift in Sources */,
+				2D8C4C392B8DDB8400422AA2 /* Play.swift in Sources */,
 				2DC7BBD72B876B1C00646249 /* Cube2DView.swift in Sources */,
 				2D96EB9E2B8B5F3300A7BC26 /* MoveControllerView.swift in Sources */,
 			);

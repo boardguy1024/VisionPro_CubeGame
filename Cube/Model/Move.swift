@@ -44,26 +44,26 @@ enum MoveType: Character, CaseIterable, Codable {
         }
     }
     
-    var filter: (Sticker) -> Bool {
+    var filter: (Vector) -> Bool {
         switch self {
-        case .R: return { $0.position.x > 0 }
-        case .L: return { $0.position.x < 0 }
-        case .U: return { $0.position.y > 0 }
-        case .D: return { $0.position.y < 0 }
-        case .F: return { $0.position.z > 0 }
-        case .B: return { $0.position.z < 0 }
-        case .Rw: return { $0.position.x >= 0 }
-        case .Lw: return { $0.position.x <= 0 }
-        case .Uw: return { $0.position.y >= 0 }
-        case .Dw: return { $0.position.y <= 0 }
-        case .Fw: return { $0.position.z >= 0 }
-        case .Bw: return { $0.position.z <= 0 }
+        case .R: return { $0.x > 0 }
+        case .L: return { $0.x < 0 }
+        case .U: return { $0.y > 0 }
+        case .D: return { $0.y < 0 }
+        case .F: return { $0.z > 0 }
+        case .B: return { $0.z < 0 }
+        case .Rw: return { $0.x >= 0 }
+        case .Lw: return { $0.x <= 0 }
+        case .Uw: return { $0.y >= 0 }
+        case .Dw: return { $0.y <= 0 }
+        case .Fw: return { $0.z >= 0 }
+        case .Bw: return { $0.z <= 0 }
         case .x: return { _ in true }
         case .y: return { _ in true }
         case .z: return { _ in true }
-        case .M: return { $0.position.x == 0 }
-        case .E: return { $0.position.y == 0 }
-        case .S: return { $0.position.z == 0 }
+        case .M: return { $0.x == 0 }
+        case .E: return { $0.y == 0 }
+        case .S: return { $0.z == 0 }
         }
     }
 }
@@ -72,7 +72,7 @@ struct Move: Codable {
     let moveType: MoveType
     let prime: Bool
     let twice: Bool
-    
+        
     init(_ moveType: MoveType, prime: Bool = false, twice: Bool = false ) {
         self.moveType = moveType
         self.prime = prime
@@ -83,6 +83,19 @@ struct Move: Codable {
         return Self(moveType, prime: !prime, twice: twice)
     }
     
+    var axis: Vector {
+        moveType.axis
+    }
+    
+    var filter: (Vector) -> Bool {
+        moveType.filter
+    }
+    
+    var angle: Float {
+        let angle: Float = .pi * (twice ? 1.0 : 0.5)
+        return angle * (prime ? 1.0 : -1.0)
+    }
+
     // 方向の文字列 Keyで それに値する Value(Move?)が返される
     static func from(_ moveStr: String) -> Move? {
         allMovesDic[moveStr]
@@ -201,11 +214,11 @@ extension Cube {
     // twice : 180°
     func apply(moveType: MoveType, prime: Bool = false, twice: Bool = false) -> Self {
         let predicated = moveType.filter
-        let targetStickers = stickers.filter { predicated($0) }
+        let targetStickers = stickers.filter { predicated($0.position) }
         
         let angle: Rotation = twice ? .filp : prime ? .counterClockwire : .clockwise
         let moved = targetStickers.map { $0.rotate(on: moveType.axis, by: angle)}
-        let notMoved = stickers.filter { !predicated($0) }
+        let notMoved = stickers.filter { !predicated($0.position) }
         
         var newCube = Cube()
         newCube.stickers = moved + notMoved
